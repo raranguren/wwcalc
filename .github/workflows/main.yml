@@ -20,7 +20,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Build
-      run: npx ng build --prod --sourceMap=false --base-href /wwcalc/
+      run: npx ng build --configuration production --base-href /wwcalc/
     - name: Archive build
       if: success()
       uses: actions/upload-artifact@v1
