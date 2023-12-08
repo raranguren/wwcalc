@@ -36,3 +36,55 @@ form>div>input {
   width: 2em;
   font-size: 1.5em;
 }
+
+.stats-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr 3fr;
+  gap: 0.5em;
+  white-space: nowrap;
+  padding: 1em;
+  width: min-content;
+}
+
+.stats-y-axis {
+  font-weight: bold;
+  text-align: left;
+  vertical-align: top;
+}
+
+.stats-align-right {
+  text-align: right;
+  vertical-align: top;
+}
+
+.stats-align-left {
+  text-align: left;
+  vertical-align: top;
+}
+
+.stats-bar-village, .stats-bar-wolves {
+  align-self: baseline;
+  border: teal solid 1px;
+  background-color: lightslategray;
+  height: 0.6em;
+  margin: 0 0 0 0.5em;
+  display: inline-block;
+}
+
+.stats-bar-wolves {
+  border: brown solid 1px;
+  background-color: rosybrown;
+  margin: 0 0.5em 0 0;
+}
+
+.stats-header-village {
+  font-weight: bold;
+  color: teal;
+  padding-right: 1em;
+}
+
+.stats-header-wolves {
+  font-weight: bold;
+  color: brown;
+  padding-left: 1em;
+}

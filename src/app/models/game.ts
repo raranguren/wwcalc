@@ -9,6 +9,7 @@ export class Game {
   private _phase: Phase = Phase.SIGN_UP;
   private _players: Player[] = [];
   private _winner?: Team;
+  private _day = 0;
 
   constructor(
     totalPlayers: number,
@@ -48,6 +49,7 @@ export class Game {
   advance() {
     const playersAlive = this._players.filter(p => p.alive);
     this._phase = this._phase == Phase.DAY ? Phase.NIGHT : Phase.DAY;
+    if (this._phase == Phase.DAY) this._day++;
     const tallies = new Map<Action, Map<Player, number>>();
     for (let player of playersAlive) {
       const actions = player.act(this._phase, playersAlive);
@@ -107,6 +109,10 @@ export class Game {
 
   get winner(): Team|undefined {
     return this._winner;
+  }
+
+  get days(): number {
+    return this._day;
   }
 
 }
