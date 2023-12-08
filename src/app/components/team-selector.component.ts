@@ -19,6 +19,10 @@ import {Game} from "../models/game";
         <label for="wolves">Number of wolves:</label>
         <input #wolves type="number" [value]="form.wolves" (input)="form.wolves = wolves.value">
       </div>
+      <div>
+          <label for="guards">Number of guards:</label>
+          <input #guards type="number" [value]="form.guards" (input)="form.guards = guards.value">
+      </div>
     </form>
   `
 })
@@ -26,17 +30,26 @@ import {Game} from "../models/game";
 export class TeamSelectorComponent {
 
   form = {
-    players: '10',
-    wolves: '2',
+    players: '',
+    wolves: '',
+    guards: '',
   };
 
   simulation = inject(SimulationService)
 
+  constructor() {
+    const game = this.simulation.game();
+    this.form.players = '' + game.players;
+    this.form.wolves = '' + game.wolves;
+    this.form.guards = '' + game.guards;
+  }
+
   onChange() {
     const players = Number.parseInt(this.form.players);
     const wolves = Number.parseInt(this.form.wolves);
+    const guards = Number.parseInt(this.form.guards);
     if (isNaN(players) || isNaN(wolves)) return;
-    const game = new Game(players, wolves);
+    const game = new Game(players, wolves, guards);
     this.simulation.start(game);
   }
 

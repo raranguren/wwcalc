@@ -14,20 +14,25 @@ export class Game {
   constructor(
     totalPlayers: number,
     numberOfWolves: number,
+    numberOfGuards: number,
   ){
     const roles: Role[] = [];
     for (let i = 0; i<numberOfWolves; i++) {
       roles.push(Role.WEREWOLF);
     }
+    for (let i = 0; i<numberOfGuards; i++) {
+      roles.push(Role.GUARD);
+    }
     for (let i = 0; i<totalPlayers; i++) {
       const role = roles[i] || Role.VILLAGER;
       this._players.push(new Player(role));
     }
-    this.teamUp(this._players.filter(p => p.team == Team.WOLVES))
+    this.teamUp(this._players.filter(p => p.team == Team.WOLVES));
+    this.teamUp(this._players.filter(p => p.role == Role.GUARD));
   }
 
   clone(): Game {
-    return new Game(this.players, this.wolves);
+    return new Game(this.players, this.wolves, this.guards);
   }
 
   teamUp(players: Player[]) {
@@ -46,6 +51,12 @@ export class Game {
       .length;
   }
 
+  get guards(): number {
+    return this._players
+      .filter(p => p.role == Role.GUARD)
+      .length;
+  }
+
   advance() {
     const playersAlive = this._players.filter(p => p.alive);
     this._phase = this._phase == Phase.DAY ? Phase.NIGHT : Phase.DAY;
@@ -60,13 +71,46 @@ export class Game {
         tallies.set(action, tallyForAction);
       }
     }
+    const guarded: Player[] = [];
+    const attacked: Player[] = [];
+    const hanged: Player[] = [];
     for (let [action, tally] of tallies) {
       const player = this.tieBreak(tally);
       if (player) {
-        player.kill();
+        if (action == Action.GUARD) {
+          guarded.push(player);
+        }
+        if (action == Action.ATTACK) {
+          attacked.push(player);
+        }
+        if (action == Action.VOTE) {
+          hanged.push(player);
+        }
+      }
+    }
+    for (let player of hanged) {
+      player.die();
+    }
+    for (let player of attacked) {
+      if (guarded.includes(player)) {
+        const wolves = this._players.filter(p => p.team == Team.WOLVES);
+        const guards = this._players.filter(p => p.role == Role.GUARD);
+        const deadWolf = wolves[Math.floor(Math.random() * wolves.length)];
+        const deadGuard = guards[Math.floor(Math.random() * guards.length)];
+        deadGuard.die();
+        deadWolf.die();
+        this.revealGood(player);
+      } else {
+        player.die();
       }
     }
     this.updateWinCondition();
+  }
+
+  revealGood(player: Player) {
+    this._players
+      .filter(p => p.team == Team.VILLAGE)
+      .forEach(p => p.friends([player]));
   }
 
   tieBreak(tally: Map<Player,number>): Player|null {

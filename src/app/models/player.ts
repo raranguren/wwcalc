@@ -17,6 +17,9 @@ export class Player {
     if (this.team == Team.WOLVES) {
       this._actions.set(Phase.NIGHT, [Action.ATTACK]);
     }
+    if (this.role == Role.GUARD) {
+      this._actions.set(Phase.NIGHT, [Action.GUARD]);
+    }
   }
 
   get alive(): boolean {
@@ -36,22 +39,22 @@ export class Player {
     this._friends = friends;
   }
 
-  toString(): string {
-    return `${this.role}`;
-  }
-
   act(phase: Phase, playersAlive: Player[]): Map<Action,Player> {
     const actions = new Map<Action,Player>();
     const legalActions = this._actions.get(phase);
     if (legalActions) {
       for (let action of legalActions) {
-        actions.set(action, this.pickEnemy(playersAlive));
+        if (action == Action.GUARD) {
+          actions.set(action, this.pickFriend(playersAlive));
+        } else {
+          actions.set(action, this.pickEnemy(playersAlive));
+        }
       }
     }
     return actions;
   }
 
-  kill() {
+  die() {
     this.place = Place.GRAVEYARD;
   }
 
@@ -60,6 +63,13 @@ export class Player {
     if (enemies.length === 0) return this;
     const randomIndex = Math.floor(Math.random() * enemies.length);
     return enemies[randomIndex];
+  }
+
+  pickFriend(targets: Player[]): Player {
+    const friends = targets.filter(target => this._friends.includes(target));
+    if (friends.length === 0) return this;
+    const randomIndex = Math.floor(Math.random() * friends.length);
+    return friends[randomIndex];
   }
 
 }

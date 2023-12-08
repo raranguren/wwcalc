@@ -28,13 +28,15 @@ form>div {
 }
 
 form>div>label {
-  padding: 1em;
+  padding: 0.8em;
   align-self: center;
 }
 
 form>div>input {
   width: 2em;
-  font-size: 1.5em;
+  font-size: 1.4em;
+  text-align: center;
+  border: black solid 1px;
 }
 
 .stats-container {
@@ -44,6 +46,7 @@ form>div>input {
   white-space: nowrap;
   padding: 1em;
   width: min-content;
+  min-width: 20em;
 }
 
 .stats-y-axis {
@@ -80,11 +83,9 @@ form>div>input {
 .stats-header-village {
   font-weight: bold;
   color: teal;
-  padding-right: 1em;
 }
 
 .stats-header-wolves {
   font-weight: bold;
   color: brown;
-  padding-left: 1em;
 }

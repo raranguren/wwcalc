@@ -11,7 +11,7 @@ export class SimulationService {
     setInterval(() => this.onTick(), 50);
   }
 
-  game = signal(new Game(10,2));
+  game = signal(new Game(10,2, 3));
   results = signal<Game[]>([]);
   winRate = computed(() => {
     const results = this.results();
