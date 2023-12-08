@@ -8,7 +8,7 @@ import {Team} from "../models/team";
 export class SimulationService {
 
   constructor() {
-    setInterval(() => this.onTick(), 100);
+    setInterval(() => this.onTick(), 50);
   }
 
   game = signal(new Game(10,2));
@@ -33,7 +33,7 @@ export class SimulationService {
   }
 
   onTick() {
-    if (this.results().length >= 100) return;
+    if (this.results().length >= 1000) return;
     const game = this.game().clone();
     while (!game.ended) game.advance();
     this.results.update(results => [...results, game]);
