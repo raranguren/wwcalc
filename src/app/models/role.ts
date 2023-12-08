@@ -1,5 +1,6 @@
 export enum Role {
   VILLAGER,
   WEREWOLF,
-  GUARD
+  GUARD,
+  HEALER,
 }

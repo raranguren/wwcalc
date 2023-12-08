@@ -11,18 +11,14 @@ import {Game} from "../models/game";
   template: `
     <h2>Game setup</h2>
     <form (change)="onChange()">
-      <div>
         <label>Number of players:</label>
         <input #players type="number" [value]="form.players" (input)="form.players = players.value">
-      </div>
-      <div>
         <label for="wolves">Number of wolves:</label>
         <input #wolves type="number" [value]="form.wolves" (input)="form.wolves = wolves.value">
-      </div>
-      <div>
-          <label for="guards">Number of guards:</label>
-          <input #guards type="number" [value]="form.guards" (input)="form.guards = guards.value">
-      </div>
+        <label for="guards">Number of guards:</label>
+        <input #guards type="number" [value]="form.guards" (input)="form.guards = guards.value">
+        <label for="healers">Number of healers:</label>
+        <input #healers type="number" [value]="form.healers" (input)="form.healers = healers.value">
     </form>
   `
 })
@@ -33,6 +29,7 @@ export class TeamSelectorComponent {
     players: '',
     wolves: '',
     guards: '',
+    healers: '',
   };
 
   simulation = inject(SimulationService)
@@ -42,14 +39,16 @@ export class TeamSelectorComponent {
     this.form.players = '' + game.players;
     this.form.wolves = '' + game.wolves;
     this.form.guards = '' + game.guards;
+    this.form.healers = '' + game.healers;
   }
 
   onChange() {
     const players = Number.parseInt(this.form.players);
     const wolves = Number.parseInt(this.form.wolves);
     const guards = Number.parseInt(this.form.guards);
+    const healers = Number.parseInt(this.form.healers);
     if (isNaN(players) || isNaN(wolves)) return;
-    const game = new Game(players, wolves, guards);
+    const game = new Game(players, wolves, guards, healers);
     this.simulation.start(game);
   }
 

@@ -20,21 +20,21 @@ h1, h2 {
   font-family: Lugrasimo, serif;
 }
 
-form>div {
-  padding: 0.5em;
+form {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 0.5em;
   width: fit-content;
-  display: flex;
-  justify-content: space-between;
 }
 
-form>div>label {
+form>label {
   padding: 0.8em;
   align-self: center;
 }
 
-form>div>input {
+form>input {
   width: 2em;
-  font-size: 1.4em;
+  font-size: 1.2em;
   text-align: center;
   border: black solid 1px;
 }

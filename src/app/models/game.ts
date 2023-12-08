@@ -15,6 +15,7 @@ export class Game {
     totalPlayers: number,
     numberOfWolves: number,
     numberOfGuards: number,
+    numberOfHealers: number,
   ){
     const roles: Role[] = [];
     for (let i = 0; i<numberOfWolves; i++) {
@@ -22,6 +23,9 @@ export class Game {
     }
     for (let i = 0; i<numberOfGuards; i++) {
       roles.push(Role.GUARD);
+    }
+    for (let i = 0; i<numberOfHealers; i++) {
+      roles.push(Role.HEALER)
     }
     for (let i = 0; i<totalPlayers; i++) {
       const role = roles[i] || Role.VILLAGER;
@@ -32,7 +36,7 @@ export class Game {
   }
 
   clone(): Game {
-    return new Game(this.players, this.wolves, this.guards);
+    return new Game(this.players, this.wolves, this.guards, this.healers);
   }
 
   teamUp(players: Player[]) {
@@ -57,6 +61,12 @@ export class Game {
       .length;
   }
 
+  get healers(): number {
+    return this._players
+      .filter(p => p.role == Role.HEALER)
+      .length;
+  }
+
   advance() {
     const playersAlive = this._players.filter(p => p.alive);
     this._phase = this._phase == Phase.DAY ? Phase.NIGHT : Phase.DAY;
@@ -74,6 +84,7 @@ export class Game {
     const guarded: Player[] = [];
     const attacked: Player[] = [];
     const hanged: Player[] = [];
+    const healed: Player[] = [];
     for (let [action, tally] of tallies) {
       const player = this.tieBreak(tally);
       if (player) {
@@ -87,6 +98,9 @@ export class Game {
           hanged.push(player);
         }
       }
+      if (action == Action.HEAL) {
+        healed.push(...tally.keys());
+      }
     }
     for (let player of hanged) {
       player.die();
@@ -96,12 +110,20 @@ export class Game {
         const wolves = this._players.filter(p => p.team == Team.WOLVES);
         const guards = this._players.filter(p => p.role == Role.GUARD);
         const deadWolf = wolves[Math.floor(Math.random() * wolves.length)];
-        const deadGuard = guards[Math.floor(Math.random() * guards.length)];
-        deadGuard.die();
+        const guard = guards[Math.floor(Math.random() * guards.length)];
+        if (healed.includes(guard)) {
+          this.revealGood(guard);
+        } else {
+          guard.die();
+        }
         deadWolf.die();
         this.revealGood(player);
       } else {
-        player.die();
+        if (healed.includes(player)) {
+          this.revealGood(player);
+        } else {
+          player.die();
+        }
       }
     }
     this.updateWinCondition();

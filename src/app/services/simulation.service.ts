@@ -8,10 +8,10 @@ import {Team} from "../models/team";
 export class SimulationService {
 
   constructor() {
-    setInterval(() => this.onTick(), 50);
+    setInterval(() => this.onTick(), 10);
   }
 
-  game = signal(new Game(10,2, 3));
+  game = signal(new Game(10,2, 3, 2));
   results = signal<Game[]>([]);
   winRate = computed(() => {
     const results = this.results();
@@ -59,11 +59,15 @@ export class SimulationService {
     this.results.set([]);
   }
 
+  private semaphore = true;
   onTick() {
-    if (this.results().length >= 1000) return;
+    if (!this.semaphore) return;
+    if (this.results().length >= 10000) return;
+    this.semaphore = false;
     const game = this.game().clone();
     while (!game.ended) game.advance();
     this.results.update(results => [...results, game]);
+    this.semaphore = true;
   }
 
 }

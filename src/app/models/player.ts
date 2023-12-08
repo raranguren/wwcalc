@@ -20,6 +20,9 @@ export class Player {
     if (this.role == Role.GUARD) {
       this._actions.set(Phase.NIGHT, [Action.GUARD]);
     }
+    if (this.role == Role.HEALER) {
+      this._actions.set(Phase.NIGHT, [Action.HEAL]);
+    }
   }
 
   get alive(): boolean {
@@ -46,6 +49,8 @@ export class Player {
       for (let action of legalActions) {
         if (action == Action.GUARD) {
           actions.set(action, this.pickFriend(playersAlive));
+        } else if (action == Action.HEAL) {
+          actions.set(action, this.pickNotSelf(playersAlive));
         } else {
           actions.set(action, this.pickEnemy(playersAlive));
         }
@@ -68,6 +73,16 @@ export class Player {
   pickFriend(targets: Player[]): Player {
     const friends = targets.filter(target => this._friends.includes(target));
     if (friends.length === 0) return this;
+    const randomIndex = Math.floor(Math.random() * friends.length);
+    return friends[randomIndex];
+  }
+
+  pickNotSelf(targets: Player[]): Player {
+    const friends = targets.filter(target => this._friends.includes(target));
+    if (friends.length === 0) {
+      const randomIndex = Math.floor(Math.random() * targets.length);
+      return targets[randomIndex];
+    }
     const randomIndex = Math.floor(Math.random() * friends.length);
     return friends[randomIndex];
   }

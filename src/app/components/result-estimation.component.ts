@@ -17,8 +17,8 @@ import {Team} from "../models/team";
         where the objective is to identify
         <b>{{simulation.countEvil()}} wol{{simulation.countEvil() == 1 ? 'f' : 'ves'}}</b>
         among them,
-        @if (simulation.game().guards > 0) {
-            with the help of the guard{{simulation.game().guards == 1 ? '' : 's'}},
+        @if (simulation.game().guards > 0 || simulation.game().healers > 0) {
+            with the help of special powers,
         }
         the estimated success rate is
         <b>{{simulation.winRate() | percent }}</b>
@@ -39,10 +39,10 @@ import {Team} from "../models/team";
                 @if (stat[1].get(Team.VILLAGE)) {
                     {{stat[1].get(Team.VILLAGE) | percent:'1.1'}}
                 }
-                <span class="stats-bar-village" [style.min-width.vh]="(stat[1].get(Team.VILLAGE)||0)*10"></span>
+                <span class="stats-bar-village" [style.min-width.vh]="(stat[1].get(Team.VILLAGE)||0)*20"></span>
             </div>
             <div class="stats-align-left">
-                <span class="stats-bar-wolves" [style.min-width.vh]="(stat[1].get(Team.WOLVES)||0)*10"></span>
+                <span class="stats-bar-wolves" [style.min-width.vh]="(stat[1].get(Team.WOLVES)||0)*20"></span>
                 @if (stat[1].get(Team.WOLVES)) {
                     {{stat[1].get(Team.WOLVES) | percent:'1.1'}}
                 }
