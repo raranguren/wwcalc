@@ -23,7 +23,7 @@ h1, h2 {
 form {
   display: grid;
   grid-template-columns: 4fr 1fr;
-  gap: 0.5em;
+  gap: 0.8em;
   width: fit-content;
 }
 
@@ -32,8 +32,26 @@ form>label {
   align-self: center;
 }
 
-form>input {
+app-number-input {
+  font-size: 1.2em;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 0.2em;
+  align-items: center;
+}
+
+app-number-input>button {
+  font-weight: bolder;
+  width: 1.2em;
+  font-size: 1.5em;
+  text-align: center;
+  align-items: center;
+}
+
+app-number-input>input {
   width: 2em;
+  height: 100%;
   font-size: 1.2em;
   text-align: center;
   border: black solid 1px;
