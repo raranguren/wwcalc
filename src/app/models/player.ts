@@ -3,12 +3,14 @@ import {Team} from "./team";
 import {Place} from "./place";
 import {Phase} from "./phase";
 import {Action} from "./action";
+import {Chat} from "./chat";
 
 export class Player {
 
   public place = Place.VILLAGE;
   private _actions = new Map<Phase, Action[]>;
   private _friends: Player[] = [];
+  private _chats: Chat[] = [];
 
   constructor(
     public role: Role
@@ -67,6 +69,15 @@ export class Player {
     const enemies = targets.filter(target => !this._friends.includes(target));
     if (enemies.length === 0) return this;
     const randomIndex = Math.floor(Math.random() * enemies.length);
+    if (this._chats.length > 0) {
+      const chat = this._chats[0];
+      if (chat.vote) {
+        if (enemies.includes(chat.vote)) {
+          return chat.vote;
+        }
+      }
+      chat.vote = enemies[randomIndex];
+    }
     return enemies[randomIndex];
   }
 
@@ -87,4 +98,7 @@ export class Player {
     return friends[randomIndex];
   }
 
+  chat(chat: Chat) {
+    this._chats.push(chat);
+  }
 }

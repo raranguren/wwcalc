@@ -3,6 +3,7 @@ import {Phase} from "./phase";
 import {Player} from "./player";
 import {Role} from "./role";
 import {Action} from "./action";
+import {Chat} from "./chat";
 
 export class Game {
 
@@ -40,8 +41,10 @@ export class Game {
   }
 
   teamUp(players: Player[]) {
+    const chat = new Chat();
     for (let player of players) {
       player.friends(players);
+      player.chat(chat);
     }
   }
 
