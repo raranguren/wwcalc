@@ -8,7 +8,7 @@ import {ResultEstimationComponent} from "./components/result-estimation.componen
   standalone: true,
   imports: [CommonModule, TeamSelectorComponent, ResultEstimationComponent],
   template: `
-    <h1>Werewolf Calculator</h1>
+    <h1>Werewolf <small>Calculator</small></h1>
     <app-team-selector></app-team-selector>
     <app-result-estimation></app-result-estimation>
   `
