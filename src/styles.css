@@ -39,6 +39,18 @@ h1 {
     display: block;
     font-size: 0.7em;
     font-variant-caps: all-petite-caps;
+    &::before, &::after {
+      content: "";
+      display: inline-block;
+      width: 4em;
+      height: 1em;
+      background: url('assets/shapes/ornament.svg') no-repeat center center;
+      background-size: contain;
+      margin: 0 0.3em -0.2em 0.3em;
+    }
+    &::after {
+      transform: scaleX(-1);
+    }
   }
 }
 
@@ -50,22 +62,24 @@ h2 {
 
 form {
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: auto auto;
   gap: 0.8em;
   padding: 0.8em;
-  width: fit-content;
+  min-width: fit-content;
+  max-width: 400px;
   border: var(--primary) solid 1px;
   border-radius: 1em;
   &>label {
     align-self: center;
+    font-weight: bold;
   }
 }
 
 app-number-input {
-  padding-right: 0.8em;
   text-align: center;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: auto auto auto;
+  width: min-content;
   gap: 0.2em;
   align-items: center;
   &>button {
@@ -96,8 +110,7 @@ app-number-input {
   gap: 0.5em;
   white-space: nowrap;
   padding: 1em;
-  width: min-content;
-  min-width: 20em;
+  width: fit-content;
   border: var(--dark) solid 1px;
   background-color: white;
 }
@@ -108,18 +121,20 @@ app-number-input {
   vertical-align: top;
 }
 
+.stats-align-left, .stats-align-right {
+  vertical-align: center;
+}
+
 .stats-align-right {
+
   text-align: right;
-  vertical-align: top;
 }
 
 .stats-align-left {
   text-align: left;
-  vertical-align: top;
 }
 
 .stats-bar-village, .stats-bar-wolves {
-  align-self: baseline;
   height: 0.6em;
   display: inline-block;
 }
@@ -128,9 +143,9 @@ app-number-input {
   margin-left: 0.5em;
   border: var(--secondary) solid 1px;
   background-image: repeating-linear-gradient(
-    -60deg,
+    -40deg,
     transparent 0 1px,
-    var(--secondary) 3px 3px
+    var(--secondary) 2px 3px
   );
 }
 
@@ -138,18 +153,20 @@ app-number-input {
   margin-right: 0.5em;
   border: var(--primary) solid 1px;
   background-image: repeating-linear-gradient(
-    -60deg,
+    -40deg,
     transparent 0 1px,
-    var(--primary) 3px 3px
+    var(--primary) 2px 3px
   );
 }
 
 .stats-header-village {
   font-weight: bold;
   color: var(--secondary);
+  border-bottom: var(--secondary) solid 1px;
 }
 
 .stats-header-wolves {
   font-weight: bold;
   color: var(--primary);
+  border-bottom: var(--primary) solid 1px;
 }
