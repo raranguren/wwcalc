@@ -1,0 +1,11 @@
+on: 
+    push:
+        branches: 
+            - main
+
+jobs:
+    Deploy:
+        runs-on: ubuntu-latest
+        steps:
+        -   uses: actions/checkout@v2
+        -   uses: colbyhill21/angular-full-ci/@v1.0
