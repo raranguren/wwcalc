@@ -23,13 +23,31 @@ body {
   font-family: Roboto, sans-serif;
   background-color: var(--bg-light);
   color: var(--dark);
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
 }
 
-.app {
+app-root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.main {
   display: flex;
   flex-direction: row;
   gap: 2em;
   justify-content: center;
+  flex: 1;
+}
+
+footer {
+  font-size: small;
+  text-align: center;
+  padding: 2em 0 1em 0;
 }
 
 app-team-selector, app-result-estimation {
@@ -49,6 +67,7 @@ h1 {
   }
   &>small {
     display: block;
+    white-space: nowrap;
     font-size: 0.7em;
     font-variant-caps: all-petite-caps;
     &::before, &::after {
@@ -185,16 +204,14 @@ app-number-input {
 
 
 @media (max-width: 50em) {
-  .app {
+  .main {
     flex-direction: column;
     gap: 0;
   }
   app-team-selector, app-result-estimation {
     width: auto;
-    max-width: auto;
   }
   .stats-container {
     width: auto;
-    max-width: auto;
   }
 }

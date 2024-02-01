@@ -9,10 +9,11 @@ import {ResultEstimationComponent} from "./components/result-estimation.componen
   imports: [CommonModule, TeamSelectorComponent, ResultEstimationComponent],
   template: `
     <h1>Werewolf <small>Calculator</small></h1>
-    <div class="app">
+    <div class="main">
       <app-team-selector></app-team-selector>
       <app-result-estimation></app-result-estimation>
     </div>
+    <footer>wwcalc v1.12 - <a href="https://github.com/raranguren/wwcalc">Source</a></footer>
   `
 })
 export class AppComponent {
