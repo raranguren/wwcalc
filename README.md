@@ -1,27 +1,11 @@
 # Wwcalc
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6.
+Hosting a game of [Werewolf](https://simple.wikipedia.org/wiki/Social_deduction_game) for your online community can be challenging. Not only you need to apply the rules correctly, keep track of deadlines for each round, of the votes during the day phase, and of the effects during the night phase, but it is also your responsibility as the game master to prepare a setup that is fun for most people.
 
-## Development server
+Those who have played many games of Werewolf might remember games in which the wolves had it too easy, or on the contrary, they had no chance. While those games can be fun, the principle of these kind of games is to prove that **an informed minority has advantage over an uninformed majority**. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This simulator tries to show, in a simplified way, the effects that the different team sizes can have, so that you, as the game master, can make an informed decision.
 
-## Code scaffolding
+Try to balance the amount of roles so that the village has a slight advantage but the wolves can still win. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

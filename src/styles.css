@@ -25,6 +25,18 @@ body {
   color: var(--dark);
 }
 
+.app {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  justify-content: center;
+}
+
+app-team-selector, app-result-estimation {
+  max-width: 30em;
+  width: 50%;
+}
+
 h1 {
   font-family: Lugrasimo, serif;
   font-size: 2em;
@@ -169,4 +181,20 @@ app-number-input {
   font-weight: bold;
   color: var(--primary);
   border-bottom: var(--primary) solid 1px;
+}
+
+
+@media (max-width: 50em) {
+  .app {
+    flex-direction: column;
+    gap: 0;
+  }
+  app-team-selector, app-result-estimation {
+    width: auto;
+    max-width: auto;
+  }
+  .stats-container {
+    width: auto;
+    max-width: auto;
+  }
 }
