@@ -1,11 +1,20 @@
-on: 
-    push:
-        branches: 
-            - main
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-    Deploy:
-        runs-on: ubuntu-latest
-        steps:
-        -   uses: actions/checkout@v2
-        -   uses: colbyhill21/angular-full-ci/@v1.0
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm install
+    - run: npm run build -- --output-path dist
+    - uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
+        publish_branch: gh-pages
