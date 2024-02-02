@@ -2,6 +2,12 @@ import {Injectable, computed, signal} from '@angular/core';
 import {Game} from "../models/game";
 import {Team} from "../models/team";
 
+/**
+ * This service exposes the state of the application in the form of signals.
+ * Some signals are settings for the simulation and can be set. 
+ * Others are computed signals and provide statistics about the games already simulated.
+ * A background process continuosly simulates games and update the state.
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -11,13 +17,25 @@ export class SimulationService {
     setInterval(() => this.onTick(), 10);
   }
 
+  /** The game setup that is being simulated. Simulations restart when this is modified. */
   game = signal(new Game(10,2, 3, 2));
+
+  /** All the games simulated. They are all ended and have winner values, number of days, etc. */
   results = signal<Game[]>([]);
+
+  /** @readonly The percent of games won by the Village team */
   winRate = computed(() => {
     const results = this.results();
     const wins = results.filter(game => game.winner == Team.VILLAGE).length;
     return wins / results.length;
   })
+
+  /** 
+   * @readonly 
+   * More detailed stats for the games simulated.
+   * The map keys are the number of days that the game lasted. 
+   * The values are the percentage of games won by each of the teams.
+   */
   stats = computed(() => {
     const results = this.results();
     const totalGames = results.length;
@@ -46,20 +64,25 @@ export class SimulationService {
     return stats;
   })
 
+  /** @readonly The number of players in the settings */
   countPlayers = computed(() => {
     return this.game().players;
   });
 
+  /** @readonly The number of players that are against the village team */
   countEvil = computed(() => {
     return this.game().wolves;
   });
 
-  start(game: Game) {
+  /** Restarts the simulation with new game settings, erasing all statistics */
+  restart(game: Game) {
     this.game.set(game);
     this.results.set([]);
   }
 
+  /** Indicates when a game simulation is running to not start another */
   private semaphore = true;
+  /** Run simulations periodically */
   onTick() {
     if (!this.semaphore) return;
     if (this.results().length >= 10000) return;

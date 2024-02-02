@@ -63,7 +63,7 @@ export class TeamSelectorComponent {
     const healers = this.form.healers;
     if (isNaN(players) || isNaN(wolves)) return;
     const game = new Game(players, wolves, guards, healers);
-    this.simulation.start(game);
+    this.simulation.restart(game);
   }
 
 }

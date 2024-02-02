@@ -5,6 +5,16 @@ import {Role} from "./role";
 import {Action} from "./action";
 import {Chat} from "./chat";
 
+/** 
+ * Represents the state of a game, including the players in it, roles, phases, etc. 
+ * The game setup is passed on the constructor. It then internally
+ * assigns roles to the players and starts in day 1 with the voting phase.
+ * 
+ * The method advance() simulates the actions of all players for the day, and 
+ * advances the state to the next phase.
+ * 
+ * After each advance, the new state can be accessed through getters.
+ */
 export class Game {
 
   private _phase: Phase = Phase.SIGN_UP;
@@ -36,11 +46,16 @@ export class Game {
     this.teamUp(this._players.filter(p => p.role == Role.GUARD));
   }
 
+  /** 
+   * Returns a new game that uses the same setup as this one 
+   * @deprecated in favor of the constructor 
+   */
   clone(): Game {
     return new Game(this.players, this.wolves, this.guards, this.healers);
   }
 
-  teamUp(players: Player[]) {
+  /** Adds players to a group chat so they can coordinate */
+  private teamUp(players: Player[]) {
     const chat = new Chat();
     for (let player of players) {
       player.friends(players);
@@ -48,28 +63,33 @@ export class Game {
     }
   }
 
+  /** @readonly The initial number of players */
   get players(): number {
     return this._players.length;
   }
 
+  /** @readonly The initial amount of wolves */
   get wolves(): number {
     return this._players
       .filter(p => p.team == Team.WOLVES)
       .length;
   }
 
+  /** @readonly The current number of guards */
   get guards(): number {
     return this._players
       .filter(p => p.role == Role.GUARD)
       .length;
   }
 
+  /** @readonly The initial number of healers */
   get healers(): number {
     return this._players
       .filter(p => p.role == Role.HEALER)
       .length;
   }
 
+  /** Advances the game to the next phase, simulating all actions from players */
   advance() {
     const playersAlive = this._players.filter(p => p.alive);
     this._phase = this._phase == Phase.DAY ? Phase.NIGHT : Phase.DAY;
@@ -132,13 +152,15 @@ export class Game {
     this.updateWinCondition();
   }
 
-  revealGood(player: Player) {
+  /** Lets all good players know that this player is good */
+  private revealGood(player: Player) {
     this._players
       .filter(p => p.team == Team.VILLAGE)
       .forEach(p => p.friends([player]));
   }
 
-  tieBreak(tally: Map<Player,number>): Player|null {
+  /** Determines which player is the target after  votes have been casted */
+  private tieBreak(tally: Map<Player,number>): Player|null {
     let highestScorePlayers: Player[] = [];
     let highestScore = -Infinity;
 
@@ -161,7 +183,8 @@ export class Game {
     }
   }
 
-  updateWinCondition() {
+  /** Verifies if one of the teams has won the game */
+  private updateWinCondition() {
     const alive = this._players.filter(p => p.alive);
     const evilCount = alive.filter(p => p.team == Team.WOLVES).length;
     const goodCount = alive.length - evilCount;
@@ -172,14 +195,17 @@ export class Game {
     }
   }
 
-  get ended() {
+  /** @readonly Indicates that the game has ended */
+  get ended():boolean {
     return this._winner !== undefined;
   }
 
+  /** @readonly Returns the team that won, if any */
   get winner(): Team|undefined {
     return this._winner;
   }
 
+  /** @readonly The number of days that passed (minimum 1) */
   get days(): number {
     return this._day;
   }
