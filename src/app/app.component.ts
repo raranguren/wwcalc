@@ -13,7 +13,7 @@ import {ResultEstimationComponent} from "./components/result-estimation.componen
       <app-team-selector></app-team-selector>
       <app-result-estimation></app-result-estimation>
     </div>
-    <footer>wwcalc v1.12 - <a href="https://github.com/raranguren/wwcalc">Source</a></footer>
+    <footer>wwcalc v1.12.1 - <a href="https://github.com/raranguren/wwcalc">Source code</a></footer>
   `
 })
 export class AppComponent {

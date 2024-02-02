@@ -39,7 +39,6 @@ app-root {
 .main {
   display: flex;
   flex-direction: row;
-  gap: 2em;
   justify-content: center;
   flex: 1;
 }
@@ -47,12 +46,13 @@ app-root {
 footer {
   font-size: small;
   text-align: center;
-  padding: 2em 0 1em 0;
+  padding: 1em 0 1em 0;
 }
 
 app-team-selector, app-result-estimation {
   max-width: 30em;
   width: 50%;
+  padding: 1em;
 }
 
 h1 {
@@ -201,7 +201,6 @@ app-number-input {
   color: var(--primary);
   border-bottom: var(--primary) solid 1px;
 }
-
 
 @media (max-width: 50em) {
   .main {
