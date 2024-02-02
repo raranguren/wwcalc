@@ -18,8 +18,4 @@ Try to balance the number of roles so that the village has a slight advantage, b
 
 This project served as a small-scale experiment to explore standalone components and using signals for state management.
 
-Built with:
-- NodeJS 20
-- Angular 17
-- Vanilla CSS
-- Github CI/CD
+Built with Angular 17
