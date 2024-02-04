@@ -18,4 +18,8 @@ Try to balance the number of roles so that the village has a slight advantage, b
 
 This project served as a small-scale experiment to explore standalone components and using signals for state management.
 
-Built with Angular 17
+Technologies:
+- Angular 17
+- Typescript, HTML, CSS
+- Jest (with [Jest-Icov coverage report](https://raranguren.github.io/wwcalc/coverage/))
+- GitHub CI/CD to GitHub Pages

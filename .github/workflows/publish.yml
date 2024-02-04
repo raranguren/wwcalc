@@ -22,7 +22,7 @@ jobs:
     - name: Test Coverage
       run: |
         npm run test:coverage
-        mv coverage docs/coverage
+        mv coverage/lcov-report docs/coverage
 
     - name: Setup Git
       run: |
