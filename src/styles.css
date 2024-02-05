@@ -236,6 +236,15 @@ app-number-input {
   border-bottom: var(--primary) solid 1px;
 }
 
+
+@media (max-width: 30em) {
+  app-team-selector, app-result-estimation {
+    width: auto;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
 @media (max-width: 50em) {
   .main {
     flex-direction: column;
