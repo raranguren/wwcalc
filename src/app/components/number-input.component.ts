@@ -5,12 +5,12 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
   standalone: true,
 
   template: `
-      <button (click)="decrease($event)">-</button>
+      <button (click)="onIncrease($event,-1)">-</button>
       <input
-              type="number"
+              type="text" inputmode="numeric" pattern="[0-9]*"
               [value]="value"
               (input)="onInput($event)">
-      <button (click)="increase($event)">+</button>
+      <button (click)="onIncrease($event, 1)">+</button>
   `
 })
 export class NumberInputComponent {
@@ -21,22 +21,19 @@ export class NumberInputComponent {
 
   onInput(event: Event){
     const inputValue = (event.target as HTMLInputElement).value;
-    const value = Number(inputValue);
-    if (!isNaN(value)) {
-      this.valueChange.emit(value);
-    }
+    this.updateAndEmitValue(Number(inputValue));
   }
 
-  decrease(event: Event) {
+  onIncrease(event: Event, increase:number) {
     event.preventDefault();
-    if (this.value <= 0) return;
-    this.value--;
-    this.valueChange.emit(this.value);
+    this.updateAndEmitValue(this.value + increase);
   }
 
-  increase(event: Event) {
-    event.preventDefault()
-    this.value++;
+  updateAndEmitValue(newValue:number) {
+    if (isNaN(newValue)) return;
+    if (newValue < 0) return;
+    if (newValue == this.value) return;
+    this.value = newValue;
     this.valueChange.emit(this.value);
   }
 
