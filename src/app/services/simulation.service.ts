@@ -1,6 +1,7 @@
-import {Injectable, computed, signal} from '@angular/core';
+import {Injectable, computed, inject, signal} from '@angular/core';
 import {Game} from "../models/game";
 import {Team} from "../models/team";
+import {JobSchedulerService} from "./job-scheduler.service";
 
 /**
  * This service exposes the state of the application in the form of signals.
@@ -13,14 +14,16 @@ import {Team} from "../models/team";
 })
 export class SimulationService {
 
+  scheduler = inject(JobSchedulerService);
+
   constructor() {
-    setInterval(() => this.onTick(), 10);
+    this.scheduler.addJob(this.backgroundJob);
   }
 
   /** The game setup that is being simulated. Simulations restart when this is modified. */
-  game = signal(new Game(10,2, 3, 2));
+  game = signal(new Game(10,2, 2, 2));
 
-  /** All the games simulated. They are all ended and have winner values, number of days, etc. */
+  /** All the games simulated. They have ended with a winner, number of days, etc. */
   results = signal<Game[]>([]);
 
   /** @readonly The percent of games won by the Village team */
@@ -80,17 +83,12 @@ export class SimulationService {
     this.results.set([]);
   }
 
-  /** Indicates when a game simulation is running to not start another */
-  private semaphore = true;
-  /** Run simulations periodically */
-  onTick() {
-    if (!this.semaphore) return;
+  /** Job to run using the job scheduler */
+  backgroundJob = () => {
     if (this.results().length >= 10000) return;
-    this.semaphore = false;
     const game = this.game().clone();
     while (!game.ended) game.advance();
     this.results.update(results => [...results, game]);
-    this.semaphore = true;
   }
 
 }

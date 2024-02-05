@@ -11,7 +11,7 @@ class MockSimulationService {
 describe('TeamSelectorComponent', () => {
   let component: TeamSelectorComponent;
   let fixture: ComponentFixture<TeamSelectorComponent>;
-  let mockSimulationService: MockSimulationService = new MockSimulationService();
+  let mockSimulationService = new MockSimulationService();
 
   beforeEach( () => {
     TestBed.configureTestingModule({
