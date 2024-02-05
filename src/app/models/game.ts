@@ -210,4 +210,9 @@ export class Game {
     return this._day;
   }
 
+  /** @readonly The list of roles in a team, with duplicates */
+  get roles(): Role[] {
+    return this._players.map(player => player.role);
+  }
+
 }

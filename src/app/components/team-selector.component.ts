@@ -2,17 +2,19 @@ import {Component, inject} from '@angular/core';
 import {SimulationService} from "../services/simulation.service";
 import {Game} from "../models/game";
 import {NumberInputComponent} from "./number-input.component";
+import { TeamRolesComponent } from './team-roles.component';
 
 @Component({
   selector: 'app-team-selector',
   standalone: true,
   imports: [
-    NumberInputComponent
+    NumberInputComponent,
+    TeamRolesComponent,
   ],
 
   template: `
     <h2>Game setup</h2>
-    <form>
+    <form class="bordered">
         <label>Total number of players:</label>
         <app-number-input
                 [value]="form.players"
@@ -34,7 +36,8 @@ import {NumberInputComponent} from "./number-input.component";
                 (valueChange)="form.healers = $event; onChange()">
         </app-number-input>
     </form>
-  `
+    <app-team-roles></app-team-roles>
+    `
 })
 
 export class TeamSelectorComponent {

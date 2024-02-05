@@ -52,7 +52,7 @@ footer {
 }
 
 app-team-selector, app-result-estimation {
-  max-width: 30em;
+  width: 26em;
   padding: 1em;
 }
 
@@ -90,7 +90,6 @@ h1 {
 h2 {
   font-family: Lugrasimo, serif;
   color: var(--primary);
-  margin: 0;
   margin-bottom: -0.2em;
 }
 
@@ -98,15 +97,43 @@ form {
   display: grid;
   grid-template-columns: auto auto;
   gap: 0.8em;
-  padding: 0.8em;
-  min-width: fit-content;
-  max-width: 400px;
-  border: var(--primary) solid 1px;
-  border-radius: 1em;
   &>label {
     align-self: center;
     font-weight: bold;
   }
+}
+
+.bordered {
+  padding: 0.8em;
+  border: var(--primary) solid 1px;
+  border-radius: 1em;
+}
+
+.auto-arrange-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.role-cell {
+  width: 2em;
+  height: 2em;
+  border-radius: 1em;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+
+  font-family: Lugrasimo, serif;
+  font-size: 1.2em;
+  font-weight: bolder;
+  padding: -1em;
+
+  color: black;
+  text-shadow: 
+    -2px -2px 0 #fff,  
+     2px -2px 0 #fff,
+    -2px  2px 0 #fff,
+     2px  2px 0 #fff;
 }
 
 app-number-input {
@@ -144,7 +171,7 @@ app-number-input {
   gap: 0.5em;
   white-space: nowrap;
   padding: 1em;
-  width: fit-content;
+  min-width: fit-content;
   border: var(--dark) solid 1px;
   background-color: white;
 }
@@ -173,8 +200,12 @@ app-number-input {
   display: inline-block;
 }
 
-.stats-bar-village {
+.stats-bar-village, .stats-bar-wolves {
   margin-left: 0.5em;
+}
+
+.stats-bar-village, .role-icon-village {
+  color: var(--secondary);
   border: var(--secondary) solid 1px;
   background-image: repeating-linear-gradient(
     -40deg,
@@ -183,8 +214,8 @@ app-number-input {
   );
 }
 
-.stats-bar-wolves {
-  margin-right: 0.5em;
+.stats-bar-wolves, .role-icon-wolves {
+  color: var(--primary);
   border: var(--primary) solid 1px;
   background-image: repeating-linear-gradient(
     -40deg,
