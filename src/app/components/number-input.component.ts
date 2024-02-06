@@ -20,8 +20,9 @@ export class NumberInputComponent {
   @Output() valueChange = new EventEmitter<number>();
 
   onInput(event: Event){
-    const inputValue = (event.target as HTMLInputElement).value;
-    this.updateAndEmitValue(Number(inputValue));
+    const input: HTMLInputElement = event.target as HTMLInputElement;
+    this.updateAndEmitValue(Number(input.value));
+    input.value = '' + this.value;
   }
 
   onIncrease(event: Event, increase:number) {
