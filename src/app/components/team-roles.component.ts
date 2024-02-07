@@ -12,10 +12,10 @@ import { RoleIconComponent } from "./role-icon.component";
   template: `
     <h2>Role distribution</h2>
     <div class="bordered auto-arrange-icons">
-      @for (role of roles(); track role) {
-        <app-role-icon [value]="role"></app-role-icon>
+      @for (role of roles(); track $index) {
+        <app-role-icon [role]="role"></app-role-icon>
       } @empty {
-        Invalid setup
+        No players
       }
     </div>
   `,

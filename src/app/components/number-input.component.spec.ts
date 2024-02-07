@@ -8,7 +8,7 @@ describe('NumberInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NumberInputComponent] // Import standalone component
+      imports: [NumberInputComponent]
     }).compileComponents();
     fixture = TestBed.createComponent(NumberInputComponent);
     component = fixture.componentInstance;

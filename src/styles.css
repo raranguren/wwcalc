@@ -240,8 +240,7 @@ app-number-input {
 @media (max-width: 30em) {
   app-team-selector, app-result-estimation {
     width: auto;
-    margin-right: 0;
-    margin-left: 0;
+    margin: 0;
   }
 }
 
@@ -249,7 +248,12 @@ app-number-input {
   .main {
     flex-direction: column;
     justify-content: start;
+    align-items: center;
     gap: 0;
+  }
+  app-team-selector, app-result-estimation {
+    padding-top: 0;
+    padding-bottom: 0;
   }
   .stats-container {
     width: auto;

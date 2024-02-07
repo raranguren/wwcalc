@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {TeamSelectorComponent} from "./components/team-selector.component";
 import {ResultEstimationComponent} from "./components/result-estimation.component";
 import { FooterComponent } from './components/footer.component';
@@ -8,7 +7,6 @@ import { FooterComponent } from './components/footer.component';
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule, 
     TeamSelectorComponent, 
     ResultEstimationComponent, 
     FooterComponent,
