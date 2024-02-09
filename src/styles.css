@@ -242,6 +242,20 @@ app-number-input {
     width: auto;
     margin: 0;
   }
+  h1 {
+    & > small {
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 2em;
+      }
+      &::after {
+        position: absolute;
+        right: 0;
+        top: 2em;
+      }
+    }
+  }
 }
 
 @media (max-width: 50em) {

@@ -1,4 +1,4 @@
-# Wwcalc - A Werewolf calculator
+# Wwcalc - A Werewolf balance calculator
 
 ## Demo
 

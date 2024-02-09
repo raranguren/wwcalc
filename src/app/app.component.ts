@@ -12,7 +12,7 @@ import { FooterComponent } from './components/footer.component';
     FooterComponent,
   ],
   template: `
-    <h1>Werewolf <small>Calculator</small></h1>
+    <h1>Werewolf <small>Balance Calculator</small></h1>
     <div class="main">
       <app-team-selector></app-team-selector>
       <app-result-estimation></app-result-estimation>
