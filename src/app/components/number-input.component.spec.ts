@@ -6,10 +6,7 @@ describe('NumberInputComponent', () => {
   let component: NumberInputComponent;
   let input: HTMLInputElement;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [NumberInputComponent]
-    }).compileComponents();
+  beforeEach(() => {
     fixture = TestBed.createComponent(NumberInputComponent);
     component = fixture.componentInstance;
     input = fixture.nativeElement.querySelector('input');

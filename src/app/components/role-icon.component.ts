@@ -11,10 +11,10 @@ import { Role } from "../models/role";
 })
 
 export class RoleIconComponent {
-  @Input() value: Role = Role.VILLAGER;
+  @Input() role: Role = Role.VILLAGER;
 
   text() {
-    switch (this.value) {
+    switch (this.role) {
         case Role.GUARD: return "g";
         case Role.HEALER: return "h";
         case Role.VILLAGER: return "";
@@ -24,7 +24,7 @@ export class RoleIconComponent {
   }
 
   cssClass() {
-    switch (this.value) {
+    switch (this.role) {
         case Role.WEREWOLF: return "role-icon-wolves";
         default: return "role-icon-village"
     }
