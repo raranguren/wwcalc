@@ -15,23 +15,27 @@ import { TeamRolesComponent } from '../team-roles/team-roles.component';
   template: `
     <h2>Game setup</h2>
     <form class="bordered">
-        <label>Total number of players:</label>
+        <label for="players">Total number of players:</label>
         <app-number-input
+                id="players"
                 [value]="form.players"
                 (valueChange)="form.players = $event; onChange()">
         </app-number-input>
-        <label>Number of wolves:</label>
+        <label for="wolves">Number of wolves:</label>
         <app-number-input
+                id="wolves"
                 [value]="form.wolves"
                 (valueChange)="form.wolves = $event; onChange()">
         </app-number-input>
-        <label>Number of guards:</label>
+        <label for="guards">Number of guards:</label>
         <app-number-input
+                id="guards"
                 [value]="form.guards"
                 (valueChange)="form.guards = $event; onChange()">
         </app-number-input>
-        <label>Number of healers:</label>
+        <label for="healers">Number of healers:</label>
         <app-number-input
+                id="healers"
                 [value]="form.healers"
                 (valueChange)="form.healers = $event; onChange()">
         </app-number-input>

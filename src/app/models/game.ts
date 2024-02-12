@@ -57,7 +57,7 @@ export class Game {
   /** Adds players to a group chat so they can coordinate */
   private teamUp(players: Player[]) {
     const chat = new Chat();
-    for (let player of players) {
+    for (const player of players) {
       player.friends(players);
       player.chat(chat);
     }
@@ -95,9 +95,9 @@ export class Game {
     this._phase = this._phase == Phase.DAY ? Phase.NIGHT : Phase.DAY;
     if (this._phase == Phase.DAY) this._day++;
     const tallies = new Map<Action, Map<Player, number>>();
-    for (let player of playersAlive) {
+    for (const player of playersAlive) {
       const actions = player.act(this._phase, playersAlive);
-      for (let [action,player] of actions) {
+      for (const [action,player] of actions) {
         const tallyForAction = tallies.get(action) || new Map<Player, number>();
         const count = tallyForAction.get(player) || 0;
         tallyForAction.set(player, count + 1);
@@ -108,7 +108,7 @@ export class Game {
     const attacked: Player[] = [];
     const hanged: Player[] = [];
     const healed: Player[] = [];
-    for (let [action, tally] of tallies) {
+    for (const [action, tally] of tallies) {
       const player = this.tieBreak(tally);
       if (player) {
         if (action == Action.GUARD) {
@@ -125,10 +125,10 @@ export class Game {
         healed.push(...tally.keys());
       }
     }
-    for (let player of hanged) {
+    for (const player of hanged) {
       player.die();
     }
-    for (let player of attacked) {
+    for (const player of attacked) {
       if (guarded.includes(player)) {
         const wolves = this._players.filter(p => p.team == Team.WOLVES);
         const guards = this._players.filter(p => p.role == Role.GUARD);
@@ -164,7 +164,7 @@ export class Game {
     let highestScorePlayers: Player[] = [];
     let highestScore = -Infinity;
 
-    for (let [player, score] of tally.entries()) {
+    for (const [player, score] of tally.entries()) {
       if (score > highestScore) {
         highestScore = score;
         highestScorePlayers = [player];

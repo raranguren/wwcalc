@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {SimulationService} from "../../services/simulation/simulation.service";
-import {CommonModule, PercentPipe} from "@angular/common";
+import {PercentPipe} from "@angular/common";
 import {Team} from "../../models/team";
 
 @Component({
@@ -15,7 +15,7 @@ import {Team} from "../../models/team";
     <p>
         In this game involving <b>{{simulation.countPlayers()}}</b> players,
         where the objective is to identify
-        <b>{{simulation.countEvil()}} wol{{simulation.countEvil() == 1 ? 'f' : 'ves'}}</b>
+        <b>{{simulation.countEvil()}} wol{{simulation.countEvil() === 1 ? 'f' : 'ves'}}</b>
         among them,
         @if (simulation.game().guards > 0 || simulation.game().healers > 0) {
             with the help of special powers,
@@ -33,7 +33,7 @@ import {Team} from "../../models/team";
         <div class="stats-align-left stats-header-wolves">Evil wins</div>
         @for (stat of simulation.stats(); track stat[0]) {
             <div class="stats-y-axis">
-                {{stat[0]}} day{{stat[0] != 1 ? 's' : ''}}
+                {{stat[0]}} day{{stat[0] !== 1 ? 's' : ''}}
             </div>
             <div class="stats-align-right">
                 @if (stat[1].get(Team.VILLAGE)) {

@@ -45,7 +45,7 @@ export class SimulationService {
     let longestGame = 0;
     let shortestGame = Infinity;
     const winCounts = new Map<number, Map<Team, number>>();
-    for (let game of results) {
+    for (const game of results) {
       const duration = game.days;
       if (duration > longestGame) longestGame = duration;
       if (duration < shortestGame) shortestGame = duration;

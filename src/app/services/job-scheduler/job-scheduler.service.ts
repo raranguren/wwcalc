@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, isDevMode } from "@angular/core";
 
 /**
  * This service runs jobs in the background, 
@@ -11,10 +11,13 @@ export class JobSchedulerService {
 
   /** Continuosly runs jobs */
   private async startScheduler() {
+    if (isDevMode()) console.debug("Running jobs...");
     while (this._jobs.length > 0) {
       try {
         await Promise.all(this._jobs.map(job => job()));
-      } catch (ignored) {}
+      } catch (e) {
+        if (isDevMode()) console.warn("[JobSchedulerService] Job failed", e);
+      }
       await new Promise(resolve => setTimeout(resolve, 10));
     }
   }

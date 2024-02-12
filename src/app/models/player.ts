@@ -64,7 +64,7 @@ export class Player {
     const actions = new Map<Action,Player>();
     const legalActions = this._actions.get(phase);
     if (legalActions) {
-      for (let action of legalActions) {
+      for (const action of legalActions) {
         if (action == Action.GUARD) {
           actions.set(action, this.pickFriendOrSelf(playersAlive));
         } else if (action == Action.HEAL) {

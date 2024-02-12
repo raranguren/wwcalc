@@ -5,13 +5,12 @@ import { SimulationService } from "../../services/simulation/simulation.service"
 
 class MockSimulationService {
   game = () => new Game(2,1,0,0);
-  restart = (game: Game) => {};
+  restart = () => {};
 }
 
 describe('TeamSelectorComponent', () => {
-  let component: TeamSelectorComponent;
   let fixture: ComponentFixture<TeamSelectorComponent>;
-  let mockSimulationService = new MockSimulationService();
+  const mockSimulationService = new MockSimulationService();
 
   beforeEach( () => {
     TestBed.configureTestingModule({
@@ -22,7 +21,6 @@ describe('TeamSelectorComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(TeamSelectorComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
