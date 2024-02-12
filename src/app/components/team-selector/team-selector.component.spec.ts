@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { TeamSelectorComponent } from "./team-selector.component";
-import { Game } from "../models/game";
-import { SimulationService } from "../services/simulation.service";
+import { Game } from "../../models/game";
+import { SimulationService } from "../../services/simulation/simulation.service";
 
 class MockSimulationService {
   game = () => new Game(2,1,0,0);

@@ -1,7 +1,7 @@
 import {Injectable, computed, inject, signal} from '@angular/core';
-import {Game} from "../models/game";
-import {Team} from "../models/team";
-import {JobSchedulerService} from "./job-scheduler.service";
+import {Game} from "../../models/game";
+import {Team} from "../../models/team";
+import {JobSchedulerService} from "../job-scheduler/job-scheduler.service";
 
 /**
  * This service exposes the state of the application in the form of signals.

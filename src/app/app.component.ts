@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {TeamSelectorComponent} from "./components/team-selector.component";
-import {ResultEstimationComponent} from "./components/result-estimation.component";
-import { FooterComponent } from './components/footer.component';
+import {TeamSelectorComponent} from "./components/team-selector/team-selector.component";
+import {ResultEstimationComponent} from "./components/result-estimation/result-estimation.component";
+import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
   selector: 'app-root',

@@ -1,6 +1,6 @@
 import { TestBed } from "@angular/core/testing";
 import { SimulationService } from "./simulation.service"
-import { JobSchedulerService } from "./job-scheduler.service";
+import { JobSchedulerService } from "../job-scheduler/job-scheduler.service";
 
 class MockJobSchedulerService {
     jobs: (() => void)[] = [];

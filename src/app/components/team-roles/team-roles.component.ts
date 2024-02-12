@@ -1,6 +1,6 @@
 import { Component, computed, inject } from "@angular/core";
-import { SimulationService } from "../services/simulation.service";
-import { RoleIconComponent } from "./role-icon.component";
+import { SimulationService } from "../../services/simulation/simulation.service";
+import { RoleIconComponent } from "../role-icon/role-icon.component";
 
 @Component({
   selector: 'app-team-roles',

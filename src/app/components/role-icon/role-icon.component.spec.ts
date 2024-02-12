@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { RoleIconComponent } from "./role-icon.component";
-import { Role } from "../models/role";
+import { Role } from "../../models/role";
 
 describe('RoleIconComponent', () => {
     let component: RoleIconComponent;

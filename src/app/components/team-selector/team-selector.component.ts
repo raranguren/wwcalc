@@ -1,8 +1,8 @@
 import {Component, inject} from '@angular/core';
-import {SimulationService} from "../services/simulation.service";
-import {Game} from "../models/game";
-import {NumberInputComponent} from "./number-input.component";
-import { TeamRolesComponent } from './team-roles.component';
+import {SimulationService} from "../../services/simulation/simulation.service";
+import {Game} from "../../models/game";
+import {NumberInputComponent} from "../number-input/number-input.component";
+import { TeamRolesComponent } from '../team-roles/team-roles.component';
 
 @Component({
   selector: 'app-team-selector',

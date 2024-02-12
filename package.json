@@ -1,6 +1,6 @@
 {
   "name": "wwcalc",
-  "version": "1.15",
+  "version": "1.15.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

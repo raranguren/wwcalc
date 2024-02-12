@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
-import {SimulationService} from "../services/simulation.service";
+import {SimulationService} from "../../services/simulation/simulation.service";
 import {CommonModule, PercentPipe} from "@angular/common";
-import {Team} from "../models/team";
+import {Team} from "../../models/team";
 
 @Component({
   selector: 'app-result-estimation',

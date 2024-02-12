@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { Role } from "../models/role";
+import { Role } from "../../models/role";
 
 @Component({
   selector: 'app-role-icon',
