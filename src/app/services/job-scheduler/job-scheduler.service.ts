@@ -7,7 +7,7 @@ import { Injectable, isDevMode } from "@angular/core";
 @Injectable({
   providedIn: 'root'
 })
-export class JobSchedulerService {
+export class JobScheduler {
 
   /** Continuosly runs jobs */
   private async startScheduler() {

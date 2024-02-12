@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {SimulationService} from "../../services/simulation/simulation.service";
+import {GameSimulator} from "../../services/game-simulator/game-simulator.service";
 import {Game} from "../../models/game";
 import {NumberInputComponent} from "../number-input/number-input.component";
 import { TeamRolesComponent } from '../team-roles/team-roles.component';
@@ -12,36 +12,7 @@ import { TeamRolesComponent } from '../team-roles/team-roles.component';
     TeamRolesComponent,
   ],
 
-  template: `
-    <h2>Game setup</h2>
-    <form class="bordered">
-        <label for="players">Total number of players:</label>
-        <app-number-input
-                id="players"
-                [value]="form.players"
-                (valueChange)="form.players = $event; onChange()">
-        </app-number-input>
-        <label for="wolves">Number of wolves:</label>
-        <app-number-input
-                id="wolves"
-                [value]="form.wolves"
-                (valueChange)="form.wolves = $event; onChange()">
-        </app-number-input>
-        <label for="guards">Number of guards:</label>
-        <app-number-input
-                id="guards"
-                [value]="form.guards"
-                (valueChange)="form.guards = $event; onChange()">
-        </app-number-input>
-        <label for="healers">Number of healers:</label>
-        <app-number-input
-                id="healers"
-                [value]="form.healers"
-                (valueChange)="form.healers = $event; onChange()">
-        </app-number-input>
-    </form>
-    <app-team-roles></app-team-roles>
-    `
+  templateUrl: "team-selector.component.html",
 })
 
 export class TeamSelectorComponent {
@@ -53,7 +24,7 @@ export class TeamSelectorComponent {
     healers: 0,
   };
 
-  simulation = inject(SimulationService)
+  simulation = inject(GameSimulator)
 
   constructor() {
     const game = this.simulation.game();

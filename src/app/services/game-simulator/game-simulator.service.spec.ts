@@ -1,6 +1,6 @@
 import { TestBed } from "@angular/core/testing";
-import { SimulationService } from "./simulation.service";
-import { JobSchedulerService } from "../job-scheduler/job-scheduler.service";
+import { GameSimulator } from "./game-simulator.service";
+import { JobScheduler } from "../job-scheduler/job-scheduler.service";
 
 class MockJobSchedulerService {
     jobs: (() => void)[] = [];
@@ -9,17 +9,17 @@ class MockJobSchedulerService {
 }
 
 describe('SimulationService', () => {
-  let service: SimulationService;
+  let service: GameSimulator;
   let mockScheduler: MockJobSchedulerService;
   
   beforeEach(() => {
     mockScheduler = new MockJobSchedulerService();
     TestBed.configureTestingModule({
         providers: [
-            {provide: JobSchedulerService, useValue: mockScheduler}
+            {provide: JobScheduler, useValue: mockScheduler}
         ]
     }).compileComponents();
-    service = TestBed.inject(SimulationService);
+    service = TestBed.inject(GameSimulator);
   });
 
   it('Should initialize with a default game', () => {

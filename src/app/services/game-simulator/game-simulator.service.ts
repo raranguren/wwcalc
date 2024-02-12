@@ -1,7 +1,7 @@
 import {Injectable, computed, inject, signal} from '@angular/core';
 import {Game} from "../../models/game";
 import {Team} from "../../models/team";
-import {JobSchedulerService} from "../job-scheduler/job-scheduler.service";
+import {JobScheduler} from "../job-scheduler/job-scheduler.service";
 
 /**
  * This service exposes the state of the application in the form of signals.
@@ -12,9 +12,9 @@ import {JobSchedulerService} from "../job-scheduler/job-scheduler.service";
 @Injectable({
   providedIn: 'root'
 })
-export class SimulationService {
+export class GameSimulator {
 
-  scheduler = inject(JobSchedulerService);
+  scheduler = inject(JobScheduler);
 
   constructor() {
     this.scheduler.addJob(this.backgroundJob);

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { TeamSelectorComponent } from "./team-selector.component";
 import { Game } from "../../models/game";
-import { SimulationService } from "../../services/simulation/simulation.service";
+import { GameSimulator } from "../../services/game-simulator/game-simulator.service";
 
 class MockSimulationService {
   game = () => new Game(2,1,0,0);
@@ -16,7 +16,7 @@ describe('TeamSelectorComponent', () => {
     TestBed.configureTestingModule({
       imports: [TeamSelectorComponent],
       providers: [
-        { provide: SimulationService, useValue: mockSimulationService }
+        { provide: GameSimulator, useValue: mockSimulationService }
       ],
     }).compileComponents();
 

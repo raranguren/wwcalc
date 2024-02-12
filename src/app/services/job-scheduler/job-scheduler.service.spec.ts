@@ -1,12 +1,12 @@
 import { TestBed } from "@angular/core/testing";
-import { JobSchedulerService } from "./job-scheduler.service"
+import { JobScheduler } from "./job-scheduler.service"
 
 describe('JobSchedulerService', () => {
-  let service: JobSchedulerService;
+  let service: JobScheduler;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(JobSchedulerService);
+    service = TestBed.inject(JobScheduler);
   });
 
   it('Should run jobs repeatedly and be stoppable', () => {

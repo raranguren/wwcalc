@@ -1,5 +1,5 @@
 import { Component, computed, inject } from "@angular/core";
-import { SimulationService } from "../../services/simulation/simulation.service";
+import { GameSimulator } from "../../services/game-simulator/game-simulator.service";
 import { RoleIconComponent } from "../role-icon/role-icon.component";
 
 @Component({
@@ -21,7 +21,7 @@ import { RoleIconComponent } from "../role-icon/role-icon.component";
   `,
 })
 export class TeamRolesComponent {
-  simulation = inject(SimulationService);
+  simulation = inject(GameSimulator);
 
   roles = computed(() => {
     return this.simulation.game().roles;
