@@ -2,6 +2,7 @@ import {Injectable, computed, inject, signal} from '@angular/core';
 import {Game} from "../../models/game";
 import {Team} from "../../models/team";
 import {JobScheduler} from "../job-scheduler/job-scheduler.service";
+import { Role } from '../../models/role';
 
 /**
  * This service exposes the state of the application in the form of signals.
@@ -21,7 +22,11 @@ export class GameSimulator {
   }
 
   /** The game setup that is being simulated. Simulations restart when this is modified. */
-  game = signal(new Game(10,2, 2, 2));
+  game = signal(new Game(10, [
+    {role: Role.WEREWOLF, count: 2},
+    {role: Role.GUARD, count: 2},
+    {role: Role.HEALER, count: 1},
+  ]));
 
   /** All the games simulated. They have ended with a winner, number of days, etc. */
   results = signal<Game[]>([]);

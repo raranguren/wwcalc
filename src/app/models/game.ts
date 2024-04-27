@@ -21,23 +21,18 @@ export class Game {
   private _players: Player[] = [];
   private _winner?: Team;
   private _day = 0;
+  private _initialRoleCounts;
 
   constructor(
     totalPlayers: number,
-    numberOfWolves: number,
-    numberOfGuards: number,
-    numberOfHealers: number,
+    roleCounts: {role: Role, count: number}[],
   ){
+    this._initialRoleCounts = roleCounts;
     const roles: Role[] = [];
-    for (let i = 0; i<numberOfWolves; i++) {
-      roles.push(Role.WEREWOLF);
+    for (const {role, count} of roleCounts) {
+      roles.push(...Array(count).fill(role));
     }
-    for (let i = 0; i<numberOfGuards; i++) {
-      roles.push(Role.GUARD);
-    }
-    for (let i = 0; i<numberOfHealers; i++) {
-      roles.push(Role.HEALER)
-    }
+
     for (let i = 0; i<totalPlayers; i++) {
       const role = roles[i] || Role.VILLAGER;
       this._players.push(new Player(role));
@@ -51,7 +46,7 @@ export class Game {
    * @deprecated in favor of the constructor 
    */
   clone(): Game {
-    return new Game(this.players, this.wolves, this.guards, this.healers);
+    return new Game(this.players, this._initialRoleCounts);
   }
 
   /** Adds players to a group chat so they can coordinate */

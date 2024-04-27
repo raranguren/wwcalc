@@ -3,6 +3,7 @@ import {GameSimulator} from "../../services/game-simulator/game-simulator.servic
 import {Game} from "../../models/game";
 import {NumberInputComponent} from "../number-input/number-input.component";
 import { TeamRolesComponent } from '../team-roles/team-roles.component';
+import { Role } from '../../models/role';
 
 @Component({
   selector: 'app-team-selector',
@@ -40,7 +41,11 @@ export class TeamSelectorComponent {
     const guards = this.form.guards;
     const healers = this.form.healers;
     if (isNaN(players) || isNaN(wolves)) return;
-    const game = new Game(players, wolves, guards, healers);
+    const game = new Game(players, [
+      {role: Role.WEREWOLF, count: wolves},
+      {role: Role.GUARD, count: guards},
+      {role: Role.HEALER, count: healers},
+    ]);
     this.simulation.restart(game);
   }
 
