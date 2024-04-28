@@ -15,6 +15,7 @@ export class Player {
   public place = Place.VILLAGE;
   private _actions = new Map<Phase, Action[]>;
   private _friends: Player[] = [];
+  private _scouted: Player[] = [];
   private _chats: Chat[] = [];
 
   constructor(
@@ -69,6 +70,8 @@ export class Player {
           actions.set(action, this.pickFriendOrSelf(playersAlive));
         } else if (action == Action.HEAL) {
           actions.set(action, this.pickFriendOrAny(playersAlive));
+        } else if (action == Action.SCOUT) {
+          actions.set(action, this.pickNotScouted(playersAlive));
         } else {
           actions.set(action, this.pickEnemy(playersAlive));
         }
@@ -121,5 +124,24 @@ export class Player {
   /** Adds this player to a group chat to coordinate with other players */
   chat(chat: Chat) {
     this._chats.push(chat);
+  }
+
+  /** Chooses next target to be scouted */
+  private pickNotScouted(targets: Player[]): Player {
+    const notScouted = targets
+      .filter(target => this != target)
+      .filter(target => !this._scouted.includes(target))
+      .filter(target => !this._friends.includes(target));
+    if (notScouted.length == 0) return this.pickEnemy(this._scouted);
+    const randomIndex = Math.floor(Math.random() * notScouted.length);
+    return notScouted[randomIndex];
+  }
+
+  /** Receives result from scouting */
+  scoutResult(player: Player, nightActivity: boolean) {
+    this._scouted.push(player);
+    if (!nightActivity) {
+      this._friends.push(player);
+    }
   }
 }

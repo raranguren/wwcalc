@@ -100,11 +100,14 @@ export class Game {
     const tallies = new Map<Action, Map<Player, number>>();
     for (const player of playersAlive) {
       const actions = player.act(this._phase, playersAlive);
-      for (const [action,player] of actions) {
+      for (const [action,target] of actions) {
         const tallyForAction = tallies.get(action) || new Map<Player, number>();
-        const count = tallyForAction.get(player) || 0;
-        tallyForAction.set(player, count + 1);
+        const count = tallyForAction.get(target) || 0;
+        tallyForAction.set(target, count + 1);
         tallies.set(action, tallyForAction);
+        if (action == Action.SCOUT) {
+          player.scoutResult(target, this.nightActivity(target.role));
+        }
       }
     }
     const guarded: Player[] = [];
@@ -112,16 +115,16 @@ export class Game {
     const hanged: Player[] = [];
     const healed: Player[] = [];
     for (const [action, tally] of tallies) {
-      const player = this.tieBreak(tally);
-      if (player) {
+      const target = this.tieBreak(tally);
+      if (target) {
         if (action == Action.GUARD) {
-          guarded.push(player);
+          guarded.push(target);
         }
         if (action == Action.ATTACK) {
-          attacked.push(player);
+          attacked.push(target);
         }
         if (action == Action.VOTE) {
-          hanged.push(player);
+          hanged.push(target);
         }
       }
       if (action == Action.HEAL) {
@@ -147,6 +150,10 @@ export class Game {
       } else {
         if (healed.includes(player)) {
           this.revealGood(player);
+        } else if (player.role == Role.LYCAN) {
+          player.role = Role.WEREWOLF;
+          const wolves = this._players.filter(p => p.team == Team.WOLVES);
+          this.teamUp(wolves);
         } else {
           player.die();
         }
@@ -216,6 +223,11 @@ export class Game {
   /** @readonly The list of roles in a team, with duplicates */
   get roles(): Role[] {
     return this._players.map(player => player.role);
+  }
+
+  /** Determines if a role has night activity */
+  nightActivity(role: Role) {
+    return role == Role.WEREWOLF || role == Role.GUARD || role == Role.HEALER || role == Role.SCOUT;
   }
 
 }

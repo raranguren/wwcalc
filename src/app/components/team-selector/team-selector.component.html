@@ -38,5 +38,19 @@
             (valueChange)="form.masons = $event; onChange()">
     </app-number-input>
     -->
+    <label for="masons">Number of scouts:</label>
+    <app-number-input
+            id="scouts"
+            [value]="form.scouts"
+            (valueChange)="form.scouts = $event; onChange()">
+    </app-number-input>
+    <!--
+    <label for="lycans">Number of lycans:</label>
+    <app-number-input
+            id="lycans"
+            [value]="form.lycans"
+            (valueChange)="form.lycans = $event; onChange()">
+    </app-number-input>
+    -->
 </form>
 <app-team-roles></app-team-roles>

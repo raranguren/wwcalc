@@ -9,4 +9,6 @@ export enum Role {
   HEALER,
   PRINCE,
   MASON,
+  SCOUT,
+  LYCAN,
 }

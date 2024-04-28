@@ -20,6 +20,9 @@ export class RoleIconComponent {
         case Role.VILLAGER: return "";
         case Role.WEREWOLF: return "W";
         case Role.PRINCE: return "p";
+        case Role.MASON: return "m";
+        case Role.SCOUT: return "s";
+        case Role.LYCAN: return "L";
         default: return "?";
     }
   }

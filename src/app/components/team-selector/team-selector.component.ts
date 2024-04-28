@@ -25,6 +25,8 @@ export class TeamSelectorComponent {
     healers: 0,
     princes: 0,
     masons: 0,
+    scouts: 0,
+    lycans: 0,
   };
 
   simulation = inject(GameSimulator)
@@ -37,6 +39,8 @@ export class TeamSelectorComponent {
     this.form.healers = game.roleCount(Role.HEALER);
     this.form.princes = game.roleCount(Role.PRINCE);
     this.form.masons = game.roleCount(Role.MASON);
+    this.form.scouts = game.roleCount(Role.SCOUT);
+    this.form.lycans = game.roleCount(Role.LYCAN);
   }
 
   onChange() {
@@ -46,6 +50,8 @@ export class TeamSelectorComponent {
     const healers = this.form.healers;
     const princes = this.form.princes;
     const masons = this.form.masons;
+    const scouts = this.form.scouts;
+    const lycans = this.form.lycans;
     if (isNaN(players) || isNaN(wolves)) return;
     const game = new Game(players, [
       {role: Role.WEREWOLF, count: wolves},
@@ -53,6 +59,8 @@ export class TeamSelectorComponent {
       {role: Role.HEALER, count: healers},
       {role: Role.PRINCE, count: princes},
       {role: Role.MASON, count: masons},
+      {role: Role.SCOUT, count: scouts},
+      {role: Role.LYCAN, count: lycans},
     ]);
     this.simulation.restart(game);
   }
