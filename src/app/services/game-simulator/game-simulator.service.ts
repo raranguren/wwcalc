@@ -79,7 +79,7 @@ export class GameSimulator {
 
   /** @readonly The number of players that are against the village team */
   countEvil = computed(() => {
-    return this.game().wolves;
+    return this.game().teamCount(Team.WOLVES);
   });
 
   /** Restarts the simulation with new game settings, erasing all statistics */

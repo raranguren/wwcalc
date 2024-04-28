@@ -7,4 +7,6 @@ export enum Role {
   WEREWOLF,
   GUARD,
   HEALER,
+  PRINCE,
+  MASON,
 }

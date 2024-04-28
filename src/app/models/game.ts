@@ -39,6 +39,7 @@ export class Game {
     }
     this.teamUp(this._players.filter(p => p.team == Team.WOLVES));
     this.teamUp(this._players.filter(p => p.role == Role.GUARD));
+    this.seerEachother(this._players.filter(p => p.role == Role.MASON));
   }
 
   /** 
@@ -58,30 +59,37 @@ export class Game {
     }
   }
 
+  /** Reveals roles to eachother */
+  private seerEachother(players: Player[]) {
+    for (const player of players) {
+      player.friends(players);
+    }
+  }
+
   /** @readonly The initial number of players */
   get players(): number {
     return this._players.length;
   }
 
-  /** @readonly The initial amount of wolves */
-  get wolves(): number {
+  /** The number of players with a certain role */
+  roleCount(role: Role): number {
     return this._players
-      .filter(p => p.team == Team.WOLVES)
+      .filter(p => p.role == role)
       .length;
   }
 
-  /** @readonly The current number of guards */
-  get guards(): number {
+  /** The number of players in a team */
+  teamCount(team : Team): number {
     return this._players
-      .filter(p => p.role == Role.GUARD)
+      .filter(p => p.team == team)
       .length;
   }
 
-  /** @readonly The initial number of healers */
-  get healers(): number {
+  /** @readonly Indicates if villagers have special roles */
+  get hasSpecialVillagers(): boolean {
     return this._players
-      .filter(p => p.role == Role.HEALER)
-      .length;
+      .filter(p => p.team == Team.VILLAGE && p.role != Role.VILLAGER)
+      .length > 0;
   }
 
   /** Advances the game to the next phase, simulating all actions from players */

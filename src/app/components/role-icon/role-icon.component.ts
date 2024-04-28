@@ -19,6 +19,7 @@ export class RoleIconComponent {
         case Role.HEALER: return "h";
         case Role.VILLAGER: return "";
         case Role.WEREWOLF: return "W";
+        case Role.PRINCE: return "p";
         default: return "?";
     }
   }

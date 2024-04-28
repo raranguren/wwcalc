@@ -2,9 +2,12 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { TeamSelectorComponent } from "./team-selector.component";
 import { Game } from "../../models/game";
 import { GameSimulator } from "../../services/game-simulator/game-simulator.service";
+import { Role } from "../../models/role";
 
 class MockSimulationService {
-  game = () => new Game(2,1,0,0);
+  game = () => new Game(2,[
+    {role : Role.WEREWOLF, count : 1},
+  ]);
   restart = () => {};
 }
 
